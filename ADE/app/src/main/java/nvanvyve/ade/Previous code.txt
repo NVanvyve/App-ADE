@@ -1,0 +1,127 @@
+// ADE
+FloatingActionButton add = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+final LinearLayout lc = (LinearLayout) findViewById(R.id.layout_cours);
+
+memory = new LinkedList<>();
+final SharedPreferences mPrefs = getSharedPreferences("label",0);
+
+// Les 3 de base que on a toujours
+programme = (EditText) findViewById(R.id.ed_programme);
+majeure = (EditText) findViewById(R.id.ed_maj);
+mineure = (EditText) findViewById(R.id.ed_min);
+
+// On charge ce qui était en mémoire
+programme.setText(mPrefs.getString("programme",null));
+majeure.setText(mPrefs.getString("majeure",null));
+mineure.setText(mPrefs.getString("mineure",null));
+
+//Chargement des cours supplémentaires précedement enregistrés
+String save_string = mPrefs.getString("cours_supp",null);
+if (save_string != null && !save_string.equals("")) {
+    String delim = ",";
+    String[] codes = save_string.split(delim);
+    for (String code : codes) {
+        EditText ed = new EditText(getApplicationContext());
+        ed.setTextSize(14);
+        ed.setText(code);
+        lc.addView(ed);
+        memory.add(ed);
+    }
+}
+
+//Rajout de cours
+add.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        final EditText ed = new EditText(getApplicationContext());
+        ed.setHint(R.string.autre_cours);
+        ed.setTextSize(14);
+        lc.addView(ed);
+        memory.add(ed);
+    }
+});
+
+public void save(){
+    SharedPreferences.Editor mEditor = mPrefs.edit();
+    String p = programme.getText().toString();
+    String ma = majeure.getText().toString();
+    String mi = mineure.getText().toString();
+
+    // verif pas de virgule etc
+    if (p.matches("^[a-zA-Z0-9_]+$") || p.equals("")) {
+        mEditor.putString("programme",p).apply();
+    }
+    if (ma.matches("^[a-zA-Z0-9_]+$") || ma.equals("")) {
+        mEditor.putString("majeure",ma).commit();
+    }
+    if (mi.matches("^[a-zA-Z0-9_]+$") || mi.equals("")) {
+        mEditor.putString("mineure",mi).commit();
+    }
+    String cours_supp = "";
+    while (!memory.isEmpty()) {
+        EditText temp = memory.pop();
+        String content = temp.getText().toString();
+        if (content.matches("^[a-zA-Z0-9_]+$") || content.equals("")) {
+            if (!temp.getText().toString().equals("")) {
+                Log.i("Settings",temp.getText().toString());
+                cours_supp += temp.getText().toString() + ",";
+            }
+        } else {
+            Toast.makeText(getApplicationContext(),R.string.alpha_numeric_avertissement,Toast.LENGTH_SHORT).show();
+        }
+    }
+    if (!cours_supp.equals("")){
+        cours_supp = cours_supp.substring(0,cours_supp.length() - 1);
+    }
+    mEditor.putString("cours_supp",cours_supp).commit();
+
+
+}
+
+@Override
+public void onBackPressed() {
+    save();
+    super.onBackPressed();
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+        SharedPreferences mPrefs = getSharedPreferences("label", 0);
+
+        String codes = "";
+        String intitules [] = {"programme","majeure","mineure"};
+
+        for (int i = 0;i<intitules.length;i++){
+            String ref = mPrefs.getString(intitules[i],"");
+            if (i==0 && ref.equals("")){
+                Context context = getApplicationContext();
+                String text = getString(R.string.avertissement_pas_de_cours);
+                Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+                toast.show();
+                break;
+            }
+            if (!ref.equals("")) {
+                if (codes.equals("")) {
+                    codes = ref;
+                } else {
+                    codes = codes + "," + ref;
+                }
+            }
+        }
+
+        String cours_supp = mPrefs.getString("cours_supp","");
+        if (!cours_supp.equals("")){
+            codes = codes+","+cours_supp;
+        }
+
+        if(!codes.equals("")) {
+            WebView browser = (WebView) findViewById(R.id.ade_view);
+            browser.getSettings().setJavaScriptEnabled(true);
+            String url = "http://horaire.uclouvain.be/direct//index.jsp?displayConfName=webEtudiant&showTree=false&showOptions=false&login=etudiant&password=student&projectId=1&code="
+                    + codes + "&weeks=";
+            browser.loadUrl(url);
+        }
+    }
