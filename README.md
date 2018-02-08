@@ -5,7 +5,7 @@
 * Visialisation d'une page web ADE affichant les cours renseignés.
 * Page de paramètres permettant d'entrer les codes de cours avec enregistrement automatique
 * Toolbar permettant de rafraichir la page et d'acceder au paramètres.
-* Parametre permettant de changer le code de l'année + lien vers explication
+* Parametre permettant de changer le code de l'année + lien vers explication OU script qui permet de recuperé le code sur un site (ade2ics)
 * Credit et licence
 * Version anglaise et francaise avec choix enregistré
 
