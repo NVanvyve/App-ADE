@@ -1,4 +1,4 @@
-package nvanvyve.ade;
+package vanvyven.ade;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

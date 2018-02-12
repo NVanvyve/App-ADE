@@ -1,4 +1,4 @@
-package nvanvyve.ade;
+package vanvyven.ade;
 
 import org.junit.Test;
 
