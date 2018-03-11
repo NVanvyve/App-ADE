@@ -2,13 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="vanvyven.ade">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_ade_foreground"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,10 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".SettingsActivity" />
-        <activity
-            android:name=".ADEActivity"
-            android:label="@string/title_activity_ade"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".ADEActivity" />
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="ec8358e672cc2e0d7182323cc7ae71a4d731087d" />
     </application>
-
 </manifest>

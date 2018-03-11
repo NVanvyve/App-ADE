@@ -1,29 +1,62 @@
 package vanvyven.ade;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.webkit.WebView;
+import android.widget.Toast;
 
-public class ADEActivity extends AppCompatActivity {
+public class ADEActivity extends BasicActivity {
 
+    String TAG = "ADE";
+    int index;
+
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ade);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        index = getIntent().getExtras().getInt(INTENT_INDEX,-1);
+        myToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle("ADE");
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        if(!isConnectedInternet(ADEActivity.this)){
+            Toast.makeText(getApplicationContext(),"You're not connected to the internet",Toast.LENGTH_LONG).show();
+        }
+
+        String codes = mPrefs.getString(MPREF_CODES_COURS_INDEX_MISSING+index,"");
+        if (codes.equals("")){
+            Toast.makeText(this,"No courses",Toast.LENGTH_LONG).show();
+        }
+        URLGenerator urlGenerator = URLGenerator.getInstance();
+        urlGenerator.setCodes(codes);
+        urlGenerator.setProjet(mPrefs.getString(MPREF_PROJECT_NBR_INDEX_MISSING+index,"1"));
+        String url = urlGenerator.getUrl();
+
+        myLog(TAG,"URL = "+url);
+
+        WebView wv = findViewById(R.id.ade_view);
+        wv.getSettings().setJavaScriptEnabled(true);
+        wv.loadUrl(url);
+
     }
+
+
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//
+//        return super.onOptionsItemSelected(item);
+//
+//    }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu_main,menu);
+//        return true;
+//    }
 
 }
