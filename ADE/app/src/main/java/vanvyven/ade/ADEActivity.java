@@ -18,8 +18,12 @@ public class ADEActivity extends BasicActivity {
         index = getIntent().getExtras().getInt(INTENT_INDEX,-1);
         myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle("ADE");
-
+        String title = mPrefs.getString(MPREF_PROJECT_NAME_INDEX_MISSING+index,null);
+        if (title==null || title.equals("") ||title.equals("ADE "+(index+1))) {
+            getSupportActionBar().setTitle("ADE");
+        } else {
+            getSupportActionBar().setTitle("ADE : "+title);
+        }
         if(!isConnectedInternet(ADEActivity.this)){
             Toast.makeText(getApplicationContext(),"You're not connected to the internet",Toast.LENGTH_LONG).show();
         }

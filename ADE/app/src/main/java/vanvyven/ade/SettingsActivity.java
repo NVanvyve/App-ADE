@@ -15,6 +15,7 @@ import java.util.LinkedList;
 public class SettingsActivity extends BasicActivity {
 
     EditText project_nbr;
+    EditText hor_name;
     int index;
     String TAG = "SETTINGS";
     LinkedList<EditText> memory;
@@ -46,6 +47,10 @@ public class SettingsActivity extends BasicActivity {
         project_nbr = findViewById(R.id.project_nbr);
         project_nbr.setText(project);
         style_ed(project_nbr);
+
+        hor_name = findViewById(R.id.hor_name);
+        hor_name.setText(mPrefs.getString(MPREF_PROJECT_NAME_INDEX_MISSING+index,"ADE "+(index+1)));
+        style_ed(hor_name);
 
         // Projet
         Button update = findViewById(R.id.project_update);
@@ -125,6 +130,7 @@ public class SettingsActivity extends BasicActivity {
     public void onBackPressed() {
         SharedPreferences.Editor editor = mPrefs.edit();
         editor.putString(MPREF_PROJECT_NBR_INDEX_MISSING+index,project_nbr.getText().toString());
+        editor.putString(MPREF_PROJECT_NAME_INDEX_MISSING+index,hor_name.getText().toString());
 
         StringBuffer sb = new StringBuffer();
         while (!memory.isEmpty()){

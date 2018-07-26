@@ -9,9 +9,16 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/info_bar"
+        android:id="@+id/set_bar"
         android:icon="@android:drawable/ic_dialog_info"
-        android:title="Info"
+        android:title="Settings"
+        android:visible="true"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/cred_bar"
+        android:icon="@android:drawable/ic_dialog_info"
+        android:title="Crédits"
         android:visible="true"
         app:showAsAction="never" />
 

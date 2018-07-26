@@ -1,55 +1,66 @@
 package vanvyven.ade;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import com.crashlytics.android.Crashlytics;
-import io.fabric.sdk.android.Fabric;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MainActivity extends BasicActivity {
     LinearLayout ll;
+    int indexCounter = 0;
+    int index_max;
+
+    SharedPreferences.Editor editor;
 
     String TAG = "MAIN";
+    private ArrayList<Button> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (CRASHLYTICS_ENABLE) {
-            Fabric.with(this, new Crashlytics());
-            logUser();
-
+            // TODO
         }
         setContentView(R.layout.activity_main);
         myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setTitle("ADE Menu");
 
-        LinearLayout ll = findViewById(R.id.layout_option);
+        ll = findViewById(R.id.layout_option);
+        list = new ArrayList<>();
 
-        Button ade = findViewById(R.id.ade_button);
-        ade.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-//                mPrefs.edit().putString(MPREF_CODES_COURS_INDEX_MISSING+"0","LELEC2531,LINGI2365,LINGI2132,LINGI2172,LINGI2241,LINGI2255,LINGI2261,LINGI2347,LINGI2252,LINGI2266,LFSAB1105,LFSA1290").apply();
-                Intent s = new Intent(MainActivity.this, ADEActivity.class);
-                s.putExtra(INTENT_INDEX,0);
-                startActivity(s);
-            }
-        });
+        editor = mPrefs.edit();
+        index_max = mPrefs.getInt(MPREF_INDEX_MAX_MEMO,0);
 
-        ImageButton settings = findViewById(R.id.settings_button);
-        settings.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent s = new Intent(MainActivity.this, SettingsActivity.class);
-                s.putExtra(INTENT_INDEX,0);
-                startActivity(s);
+        do {
+            add_new(indexCounter);
+        }while (indexCounter<index_max);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        for (Button b : list){
+            int index = list.indexOf(b);
+            String name = mPrefs.getString(MPREF_PROJECT_NAME_INDEX_MISSING+index,"ADE "+(index+1));
+            if (name.equals("")){
+                name = "ADE "+(index+1);
             }
-        });
+            b.setText(name);
+        }
     }
 
     @Override
@@ -60,9 +71,14 @@ public class MainActivity extends BasicActivity {
 
         switch (item.getItemId()) {
             case R.id.add_bar:
-                myLog(TAG,"ADD MAIN");
-//                Toast.makeText(this,"Add",Toast.LENGTH_LONG).show();
-//                add_new();
+                add_new(indexCounter);
+                return super.onOptionsItemSelected(item);
+            case R.id.cred_bar:
+                credit();
+                return super.onOptionsItemSelected(item);
+            case R.id.set_bar:
+                Toast.makeText(this,"Settings",Toast.LENGTH_SHORT).show();
+                return super.onOptionsItemSelected(item);
 
             default:
                 // If we got here, the user's action was not recognized.
@@ -72,24 +88,140 @@ public class MainActivity extends BasicActivity {
         }
     }
 
-    private void add_new() {
+    private void credit() {
+        AlertDialog.Builder builder;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(this);
+        }
+        builder.setTitle("Crédits")
+                .setMessage("Application créée par Nicolas Vanvyve en juillet 2018.\nCode disponible sur Github :\nhttps://github.com/NVanvyve/App-ADE")
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .show();
+    }
+
+    private void add_new(final int index) {
         LinearLayout lin = new LinearLayout(this);
         lin.setOrientation(LinearLayout.HORIZONTAL);
         lin.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
-        Button new_she = new Button(this);
-        new_she.setText("NEW ADE");
-        new_she.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        Button ade = new Button(this);
+        list.add(ade);
+        String name = mPrefs.getString(MPREF_PROJECT_NAME_INDEX_MISSING+index,"ADE "+(index+1));
+        if (name.equals("")){
+            name = "ADE "+(index+1);
+        }
+        ade.setText(name);
+        ade.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
-        ImageButton im_but = new ImageButton(this);
-        im_but.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-        im_but.setImageResource(R.mipmap.ic_launcher_round);
+        ImageButton settings = new ImageButton(this);
+        settings.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT));
+        settings.setImageResource(R.mipmap.ic_settings_foreground);
 
-        lin.addView(new_she);
-        lin.addView(im_but);
+        ade.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent s = new Intent(MainActivity.this, ADEActivity.class);
+                s.putExtra(INTENT_INDEX,index);
+                startActivity(s);
+            }
+        });
+
+        settings.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent s = new Intent(MainActivity.this, SettingsActivity.class);
+                s.putExtra(INTENT_INDEX,index);
+                startActivity(s);
+            }
+        });
+
+        final String finalName = name;
+        ade.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                showDialogBox(index,finalName);
+                return true;
+            }
+        });
+
+        settings.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                showDialogBox(index,finalName);
+                return true;
+            }
+        });
+
+
+        lin.addView(settings);
+        lin.addView(ade);
 
         ll.addView(lin);
+        indexCounter++;
 
+        if (indexCounter>index_max) {
+            index_max++;
+            editor.putInt(MPREF_INDEX_MAX_MEMO, index_max).apply();
+        }
+    }
+
+    private void showDialogBox(final int i, String name) {
+        AlertDialog.Builder builder;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(this);
+        }
+        builder.setTitle(name);
+        if (i==0){
+            builder.setMessage("Impossible de supprimer le 1er element")
+                    .setCancelable(true)
+                    .setNeutralButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // do nothing
+                        }
+                    });
+        }else {
+            builder.setMessage("Etes vous sur de vouloir supprimer cet horaire?")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            delete(i);
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // do nothing
+                        }
+                    });
+        }
+
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
+        builder.show();
+    }
+
+    private void delete(int i){
+
+        myLog(TAG,"indexCounter  "+indexCounter);
+        myLog(TAG,"i  "+i);
+        myLog(TAG,"index_max  "+index_max);
+
+        index_max--;
+        indexCounter--;
+            for(int j=i;j<index_max;j++){
+                editor.putString(MPREF_PROJECT_NBR_INDEX_MISSING+j,mPrefs.getString(MPREF_PROJECT_NBR_INDEX_MISSING+(j+1),""));
+                editor.putString(MPREF_PROJECT_NAME_INDEX_MISSING+j,mPrefs.getString(MPREF_PROJECT_NAME_INDEX_MISSING+(j+1),""));
+                editor.putString(MPREF_CODES_COURS_INDEX_MISSING+j,mPrefs.getString(MPREF_CODES_COURS_INDEX_MISSING+(j+1),""));
+                editor.apply();
+            }
+            editor.remove(MPREF_CODES_COURS_INDEX_MISSING+indexCounter);
+            editor.remove(MPREF_PROJECT_NAME_INDEX_MISSING+indexCounter);
+            editor.remove(MPREF_PROJECT_NBR_INDEX_MISSING+indexCounter);
+            ll.removeView((View)list.get(indexCounter).getParent());
+            list.remove(indexCounter);
+        editor.putInt(MPREF_INDEX_MAX_MEMO,index_max);
+        editor.apply();
     }
 
 

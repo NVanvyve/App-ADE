@@ -1,6 +1,5 @@
 package vanvyven.ade;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -13,13 +12,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.EditText;
 
-import com.crashlytics.android.Crashlytics;
 
 /**
  * Created by Nicolas Vanvyve on 13/02/2018.
  */
 
-@SuppressLint("Registered")
 public class BasicActivity extends AppCompatActivity {
 
     protected Toolbar myToolbar;
@@ -28,7 +25,9 @@ public class BasicActivity extends AppCompatActivity {
 
     protected final String MPREF_CODES_COURS_INDEX_MISSING = "codes_";
     protected final String MPREF_PROJECT_NBR_INDEX_MISSING = "project_";
+    protected final String MPREF_PROJECT_NAME_INDEX_MISSING = "hor_name_";
     protected final String INTENT_INDEX = "index";
+    protected final String MPREF_INDEX_MAX_MEMO = "index_memo";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,14 +49,6 @@ public class BasicActivity extends AppCompatActivity {
             return networkState.compareTo(NetworkInfo.State.CONNECTED) == 0;
         }
         else return false;
-    }
-
-    protected void logUser() {
-        // TODO: Use the current user's information
-        // You can call any combination of these three methods
-//        Crashlytics.setUserIdentifier("12345");
-//        Crashlytics.setUserEmail("user@fabric.io");
-//        Crashlytics.setUserName("Test User");
     }
 
     protected void style_ed(EditText ed) {

@@ -20,8 +20,5 @@
         </activity>
         <activity android:name=".SettingsActivity" />
         <activity android:name=".ADEActivity" />
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="ec8358e672cc2e0d7182323cc7ae71a4d731087d" />
     </application>
 </manifest>
