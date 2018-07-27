@@ -15,10 +15,14 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".SettingsActivity" />
         <activity android:name=".ADEActivity" />
+        <activity android:name=".Tuto.SwipeTuto" />
+        <activity android:name=".GlobalSettings"></activity>
     </application>
+
 </manifest>

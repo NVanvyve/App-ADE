@@ -21,7 +21,7 @@ import android.widget.EditText;
 public class BasicActivity extends AppCompatActivity {
 
     protected Toolbar myToolbar;
-    protected SharedPreferences mPrefs;
+    public static SharedPreferences mPrefs;
     protected final boolean CRASHLYTICS_ENABLE = false;
 
     protected final String MPREF_CODES_COURS_INDEX_MISSING = "codes_";
@@ -29,13 +29,14 @@ public class BasicActivity extends AppCompatActivity {
     protected final String MPREF_PROJECT_NAME_INDEX_MISSING = "hor_name_";
     protected final String INTENT_INDEX = "index";
     protected final String MPREF_INDEX_MAX_MEMO = "index_memo";
+    public static final String MPREF_TUTO = "tuto";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPrefs = getSharedPreferences("ADE_memory", 0);
     }
 
-    protected static void myLog(String tag, String msg){
+    public static void myLog(String tag, String msg){
         if(BuildConfig.DEBUG) {
             Log.e(tag,msg);
         }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageButton
+            android:id="@+id/imageButtonTuto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:cropToPadding="false"
+            android:elevation="4dp"
+            android:src="@mipmap/ic_ade_foreground"
+            android:visibility="visible" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageButtonTuto"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="39dp"
+            android:text="Ce tutoriel ne s'affichera qu'une seule fois" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/imageButtonTuto"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="68dp"
+            android:gravity="center_horizontal"
+            android:text="Cliquez sur l'icone pour acceder à l'application" />
+    </RelativeLayout>
+
+</LinearLayout>

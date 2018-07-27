@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import vanvyven.ade.Tuto.SwipeTuto;
+
 public class MainActivity extends BasicActivity {
     LinearLayout ll;
     int indexCounter = 0;
@@ -34,6 +36,13 @@ public class MainActivity extends BasicActivity {
             // TODO
         }
         setContentView(R.layout.activity_main);
+
+        if(!mPrefs.getBoolean(MPREF_TUTO, false)){
+            myLog(TAG,"Start Tuto");
+            startActivity(new Intent(this,SwipeTuto.class));
+
+        }
+
         myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setTitle("ADE Menu");
@@ -77,7 +86,8 @@ public class MainActivity extends BasicActivity {
                 credit();
                 return super.onOptionsItemSelected(item);
             case R.id.set_bar:
-                Toast.makeText(this,"Settings",Toast.LENGTH_SHORT).show();
+                Intent s = new Intent(MainActivity.this, GlobalSettings.class);
+                startActivity(s);
                 return super.onOptionsItemSelected(item);
 
             default:
