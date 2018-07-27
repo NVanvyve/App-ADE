@@ -2,6 +2,7 @@ package vanvyven.ade;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -47,6 +48,7 @@ public class SettingsActivity extends BasicActivity {
         project_nbr = findViewById(R.id.project_nbr);
         project_nbr.setText(project);
         style_ed(project_nbr);
+        project_nbr.setInputType(InputType.TYPE_CLASS_NUMBER);
 
         hor_name = findViewById(R.id.hor_name);
         hor_name.setText(mPrefs.getString(MPREF_PROJECT_NAME_INDEX_MISSING+index,"ADE "+(index+1)));

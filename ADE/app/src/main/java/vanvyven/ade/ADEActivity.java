@@ -30,7 +30,7 @@ public class ADEActivity extends BasicActivity {
             getSupportActionBar().setTitle("ADE : "+title);
         }
         if(!isConnectedInternet(ADEActivity.this)){
-            Toast.makeText(getApplicationContext(),"You're not connected to the internet",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Vous n'êtes pas connecté à internet",Toast.LENGTH_LONG).show();
         }
 
         String codes = mPrefs.getString(MPREF_CODES_COURS_INDEX_MISSING+index,"");

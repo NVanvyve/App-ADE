@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.util.Log;
 import android.widget.EditText;
 
@@ -55,7 +56,7 @@ public class BasicActivity extends AppCompatActivity {
         ed.setTextColor(getResources().getColor(R.color.colorEditText_text));//BLACK
         ed.setHintTextColor(getResources().getColor(R.color.colorEditText_hint));
         ed.getBackground().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
-
+        ed.setInputType(InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS);
     }
 
 }

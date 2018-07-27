@@ -58,7 +58,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="Nom perso : " />
+                android:text="Nom  : " />
 
             <EditText
                 android:id="@+id/hor_name"
@@ -77,14 +77,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Codes cours :" />
-
-        <!--<EditText-->
-        <!--android:id="@+id/cours1"-->
-        <!--android:hint="Code cours"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:ems="10"/>-->
-
 
         <ScrollView
             android:layout_width="match_parent"
