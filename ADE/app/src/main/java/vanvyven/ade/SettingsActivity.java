@@ -41,10 +41,6 @@ public class SettingsActivity extends BasicActivity {
         final String project = mPrefs.getString(MPREF_PROJECT_NBR_INDEX_MISSING+index,"1");
         myLog(TAG,"Projet : "+project);
 
-//        cours_i = findViewById(R.id.cours1);
-//        cours_i.setText(cours);
-
-
         project_nbr = findViewById(R.id.project_nbr);
         project_nbr.setText(project);
         style_ed(project_nbr);
@@ -64,7 +60,7 @@ public class SettingsActivity extends BasicActivity {
                     project_nbr.setText(update_nbr);
                 }
                 else {
-                    Toast.makeText(getApplicationContext(),"You're not connected to the internet",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.internetconnected,Toast.LENGTH_LONG).show();
                 }
 
             }

@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.Toast;
 
 public class GlobalSettings extends BasicActivity {
 
@@ -41,7 +43,65 @@ public class GlobalSettings extends BasicActivity {
                 showDialogBox();
             }
         });
+
+        Button update = findViewById(R.id.update);
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isConnectedInternet(GlobalSettings.this)){
+                    if ((!check_version())){
+                            updatebox();
+                    }else {
+                        Toast.makeText(getApplicationContext(),"Application à jour",Toast.LENGTH_LONG).show();
+                    }
+                }else {
+                    Toast.makeText(getApplicationContext(), R.string.internetconnected,Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        Button projet = findViewById(R.id.projectid);
+        projet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder;
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    builder = new AlertDialog.Builder(GlobalSettings.this, DIALOG_THEME);
+                } else {
+                    builder = new AlertDialog.Builder(GlobalSettings.this);
+                }
+                builder.setTitle("Le projet ADE c'est quoi?")
+                        .setMessage("Le numéro du projet permet d'afficher la bonne année académique (1 pour 2017-18, 2 pour 2018-19).\n" +
+                                "Normalement il est possible de mettre à jour automatiquement ce code en utilisant le bouton prévu çà cet effet.\n" +
+                                "Si cela ne fonctionne pas il est toujours possible d'entrer soi-même le code. On peut facilement le trouver quand on consulte ADE sur un ordinateur.\n" +
+                                "Il se trouve dans l'URL, après le signe \"=\" dans \"projectId=\"")
+                        .setIcon(android.R.drawable.ic_menu_info_details)
+                        .show();
+            }
+        });
+
+        Button share = findViewById(R.id.share);
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder;
+                ImageView view1 = new ImageView(GlobalSettings.this);
+                view1.setImageResource(R.drawable.readmelink);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    builder = new AlertDialog.Builder(GlobalSettings.this, DIALOG_THEME);
+                } else {
+                    builder = new AlertDialog.Builder(GlobalSettings.this);
+                }
+                builder.setView(view1)
+                        .show();
+
+            }
+        });
     }
+
+
 
     private void showDialogBox() {
         AlertDialog.Builder builder;
@@ -64,7 +124,7 @@ public class GlobalSettings extends BasicActivity {
                     }
                 });
 
-        builder.setIcon(android.R.drawable.ic_dialog_alert);
+        builder.setIcon(android.R.drawable.ic_menu_delete);
         builder.show();
     }
 

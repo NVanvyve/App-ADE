@@ -24,13 +24,14 @@ public class ADEActivity extends BasicActivity {
         myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
         String title = mPrefs.getString(MPREF_PROJECT_NAME_INDEX_MISSING+index,null);
+
         if (title==null || title.equals("") ||title.equals("ADE "+(index+1))) {
             getSupportActionBar().setTitle("ADE");
         } else {
             getSupportActionBar().setTitle("ADE : "+title);
         }
         if(!isConnectedInternet(ADEActivity.this)){
-            Toast.makeText(getApplicationContext(),"Vous n'êtes pas connecté à internet",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),R.string.internetconnected,Toast.LENGTH_LONG).show();
         }
 
         String codes = mPrefs.getString(MPREF_CODES_COURS_INDEX_MISSING+index,"");

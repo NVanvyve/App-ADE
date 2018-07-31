@@ -41,8 +41,7 @@ public class SwipeTuto extends FragmentActivity {
                 R.drawable.tuto8,
                 R.drawable.tuto9,
                 R.drawable.tuto10,
-                R.drawable.tuto11,
-                R.drawable.tuto1
+                R.drawable.tuto11
         };
 
         mPager = (ViewPager) findViewById(R.id.pager);
