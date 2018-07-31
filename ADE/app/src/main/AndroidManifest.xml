@@ -23,6 +23,9 @@
         <activity android:name=".ADEActivity" />
         <activity android:name=".Tuto.SwipeTuto" />
         <activity android:name=".GlobalSettings"/>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="ec8358e672cc2e0d7182323cc7ae71a4d731087d" />
     </application>
 
 </manifest>

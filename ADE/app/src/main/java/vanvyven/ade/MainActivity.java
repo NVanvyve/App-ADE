@@ -20,6 +20,8 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 import java.util.ArrayList;
 
 import vanvyven.ade.Tuto.SwipeTuto;
@@ -38,14 +40,12 @@ public class MainActivity extends BasicActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (CRASHLYTICS_ENABLE) {
-            // TODO
-        }
+            Fabric.with(this, new Crashlytics());        }
 
         setContentView(R.layout.activity_main);
 
         if(!mPrefs.getBoolean(MPREF_TUTO, false)){
             startActivity(new Intent(this,SwipeTuto.class));
-
         }
 
         myToolbar = findViewById(R.id.toolbar);
@@ -100,6 +100,7 @@ public class MainActivity extends BasicActivity {
         switch (item.getItemId()) {
             case R.id.add_bar:
                 add_new(indexCounter);
+
                 return super.onOptionsItemSelected(item);
             case R.id.cred_bar:
                 credit();
@@ -139,9 +140,6 @@ public class MainActivity extends BasicActivity {
 
         // Make the textview clickable. Must be called after show()
         ((TextView)d.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
-
-
-        //.setMovementMethod(LinkMovementMethod.getInstance());
 
     }
 

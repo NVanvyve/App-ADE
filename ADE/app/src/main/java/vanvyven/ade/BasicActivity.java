@@ -31,7 +31,7 @@ public class BasicActivity extends AppCompatActivity {
 
     protected Toolbar myToolbar;
     public static SharedPreferences mPrefs;
-    protected final boolean CRASHLYTICS_ENABLE = false;
+    protected final boolean CRASHLYTICS_ENABLE = true;
 
     protected final String MPREF_CODES_COURS_INDEX_MISSING = "codes_";
     protected final String MPREF_PROJECT_NBR_INDEX_MISSING = "project_";
@@ -113,7 +113,7 @@ public class BasicActivity extends AppCompatActivity {
         }
         int vcode = Integer.parseInt(code.split(" ")[1]);
 
-        return (BuildConfig.VERSION_CODE == vcode);
+        return (BuildConfig.VERSION_CODE >= vcode);
     }
 
 }
