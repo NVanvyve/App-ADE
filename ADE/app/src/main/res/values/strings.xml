@@ -2,5 +2,5 @@
     <string name="app_name">ADE</string>
     <string name="title_activity_ade">ADEActivity</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="internetconnected">Vous n\'êtes pas connecté à internett</string>
+    <string name="internetconnected">Vous n\'êtes pas connecté à internet</string>
 </resources>
