@@ -66,7 +66,7 @@ public class URLGenerator{
 
     String getUrl() {
         if (!codes.equals("")) {
-            url = "http://horaire.uclouvain.be/direct//index.jsp?displayConfName=webEtudiant&showTree=false&showOptions=false&login=etudiant&password=student&projectId=" + projet + "&code="
+            url = "http://horaire.uclouvain.be/direct/index.jsp?displayConfName=webEtudiant&showTree=false&showOptions=false&login=etudiant&password=student&projectId=" + projet + "&code="
                     + codes + "&weeks=";
         }
         return url;
