@@ -43,19 +43,19 @@
             android:layout_weight="1"
             android:text="HARD RESET" />
 
-        <Button
-            android:id="@+id/update"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="UPDATE CHECK" />
+        <!--<Button-->
+            <!--android:id="@+id/update"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="UPDATE CHECK" />-->
 
-        <Button
-            android:id="@+id/share"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Partager l'app" />
+        <!--<Button-->
+            <!--android:id="@+id/share"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="Partager l'app" />-->
 
         <Button
             android:id="@+id/projectid"

@@ -215,8 +215,11 @@ public class MainActivity extends BasicActivity {
         } else {
             builder = new AlertDialog.Builder(this);
         }
-        builder.setTitle(name);
-        if (i==0){
+        // TODO Si on décommente la ligne suivante il y des confusion dans les noms des différents horaire lorsue on essaye d'en supprimer plusieurs à la suite l'un de l'autre
+//        builder.setTitle(name);
+
+        builder.setTitle("Suppression");
+        if (index_max==1){
             builder.setMessage("Impossible de supprimer le 1er element")
                     .setCancelable(true)
                     .setNeutralButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -244,6 +247,7 @@ public class MainActivity extends BasicActivity {
 
     private void delete(int i){
 
+
         myLog(TAG,"indexCounter  "+indexCounter);
         myLog(TAG,"i  "+i);
         myLog(TAG,"index_max  "+index_max);
@@ -263,6 +267,8 @@ public class MainActivity extends BasicActivity {
             list.remove(indexCounter);
         editor.putInt(MPREF_INDEX_MAX_MEMO,index_max);
         editor.apply();
+
+        this.onResume();
     }
 
 

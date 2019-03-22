@@ -44,21 +44,21 @@ public class GlobalSettings extends BasicActivity {
             }
         });
 
-        Button update = findViewById(R.id.update);
-        update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isConnectedInternet(GlobalSettings.this)){
-                    if ((!check_version())){
-                            updatebox();
-                    }else {
-                        Toast.makeText(getApplicationContext(),"Application à jour",Toast.LENGTH_LONG).show();
-                    }
-                }else {
-                    Toast.makeText(getApplicationContext(), R.string.internetconnected,Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+//        Button update = findViewById(R.id.update);
+//        update.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (isConnectedInternet(GlobalSettings.this)){
+//                    if ((!check_version())){
+//                            updatebox();
+//                    }else {
+//                        Toast.makeText(getApplicationContext(),"Application à jour",Toast.LENGTH_LONG).show();
+//                    }
+//                }else {
+//                    Toast.makeText(getApplicationContext(), R.string.internetconnected,Toast.LENGTH_LONG).show();
+//                }
+//            }
+//        });
 
         Button projet = findViewById(R.id.projectid);
         projet.setOnClickListener(new View.OnClickListener() {
@@ -81,24 +81,24 @@ public class GlobalSettings extends BasicActivity {
             }
         });
 
-        Button share = findViewById(R.id.share);
-        share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder;
-                ImageView view1 = new ImageView(GlobalSettings.this);
-                view1.setImageResource(R.drawable.readmelink);
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    builder = new AlertDialog.Builder(GlobalSettings.this, DIALOG_THEME);
-                } else {
-                    builder = new AlertDialog.Builder(GlobalSettings.this);
-                }
-                builder.setView(view1)
-                        .show();
-
-            }
-        });
+//        Button share = findViewById(R.id.share);
+//        share.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                AlertDialog.Builder builder;
+//                ImageView view1 = new ImageView(GlobalSettings.this);
+//                view1.setImageResource(R.drawable.readmelink);
+//
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                    builder = new AlertDialog.Builder(GlobalSettings.this, DIALOG_THEME);
+//                } else {
+//                    builder = new AlertDialog.Builder(GlobalSettings.this);
+//                }
+//                builder.setView(view1)
+//                        .show();
+//
+//            }
+//        });
     }
 
 

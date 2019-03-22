@@ -38,7 +38,7 @@ public class SettingsActivity extends BasicActivity {
         myLog(TAG,MPREF_CODES_COURS_INDEX_MISSING+index);
         String cours = mPrefs.getString(MPREF_CODES_COURS_INDEX_MISSING+index,"");
         myLog(TAG,"Codes : "+cours);
-        final String project = mPrefs.getString(MPREF_PROJECT_NBR_INDEX_MISSING+index,"1");
+        final String project = mPrefs.getString(MPREF_PROJECT_NBR_INDEX_MISSING+index,"2");
         myLog(TAG,"Projet : "+project);
 
         project_nbr = findViewById(R.id.project_nbr);
