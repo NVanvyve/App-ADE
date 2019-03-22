@@ -31,7 +31,7 @@ public class BasicActivity extends AppCompatActivity {
 
     protected Toolbar myToolbar;
     public static SharedPreferences mPrefs;
-    protected final boolean CRASHLYTICS_ENABLE = true;
+    protected final boolean CRASHLYTICS_ENABLE = false;
 
     protected final String MPREF_CODES_COURS_INDEX_MISSING = "codes_";
     protected final String MPREF_PROJECT_NBR_INDEX_MISSING = "project_";

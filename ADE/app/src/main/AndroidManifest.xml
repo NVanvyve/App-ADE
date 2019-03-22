@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="vanvyven.ade">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -11,7 +12,8 @@
         android:icon="@mipmap/ic_ade_round"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme.NoActionBar"
+        tools:ignore="GoogleAppIndexingWarning,RtlEnabled">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,8 +25,8 @@
         <activity android:name=".Tuto.SwipeTuto" />
         <activity android:name=".GlobalSettings"/>
         <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="ec8358e672cc2e0d7182323cc7ae71a4d731087d" />
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-2507258873037669~5832777732"/>
     </application>
 
 </manifest>

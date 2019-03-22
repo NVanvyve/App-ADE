@@ -20,8 +20,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.crashlytics.android.Crashlytics;
-import io.fabric.sdk.android.Fabric;
 import java.util.ArrayList;
 
 import vanvyven.ade.Tuto.SwipeTuto;
@@ -39,8 +37,6 @@ public class MainActivity extends BasicActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (CRASHLYTICS_ENABLE) {
-            Fabric.with(this, new Crashlytics());        }
 
         setContentView(R.layout.activity_main);
 
@@ -62,18 +58,18 @@ public class MainActivity extends BasicActivity {
             add_new(indexCounter);
         }while (indexCounter<index_max);
 
-        if (isConnectedInternet(this)){
-            if ((!check_version())){
-                int count = mPrefs.getInt(MPREF_COUNTDOWN,0);
-                if(count==0){
-                    updatebox();
-                    count = 20;
-                }else {
-                    count--;
-                }
-                editor.putInt(MPREF_COUNTDOWN,count).apply();
-            }
-        }
+//        if (isConnectedInternet(this)){
+//            if ((!check_version())){
+//                int count = mPrefs.getInt(MPREF_COUNTDOWN,0);
+//                if(count==0){
+//                    updatebox();
+//                    count = 20;
+//                }else {
+//                    count--;
+//                }
+//                editor.putInt(MPREF_COUNTDOWN,count).apply();
+//            }
+//        }
     }
 
 
